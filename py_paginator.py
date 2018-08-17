@@ -39,7 +39,7 @@ class Paginator(object):
 
 
     @curr_page.setter
-    def set_curr_page(self, curr_page):
+    def curr_page(self, curr_page):
         self._curr_page = curr_page
         self._process_page_numbers()
 
@@ -50,7 +50,7 @@ class Paginator(object):
 
 
     @item_limit.setter
-    def set_item_limit(self, item_limit):
+    def item_limit(self, item_limit):
         self._item_limit = item_limit
         self._process_page_numbers()
 
