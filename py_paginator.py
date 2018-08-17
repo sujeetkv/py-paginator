@@ -20,51 +20,76 @@ class Paginator(object):
     """Paginator class generate page numbers for pagination
 
     :param total_items: number of total items
+
     :param item_limit: number of items per page
+
     :param curr_page: current page number
     """
-    def __init__(self, total_items, item_limit, curr_page):
+    def __init__(self, total_items, item_limit, curr_page=1):
         self.total_items = int(total_items)
-        self.item_limit = int(item_limit)
-        self.curr_page = int(curr_page)
+        self._item_limit = int(item_limit)
+        self._curr_page = int(curr_page)
         self.first_page = 1
-        self.last_page = int(math.ceil(float(self.total_items) / float(self.item_limit)))
-        if self.curr_page < 1 or self.curr_page > self.last_page:
-           self.curr_page = 1
-        self.prev_page = self.curr_page - 1
-        self.next_page = self.curr_page + 1
-        self.item_offset = self.prev_page * self.item_limit
-        self.page_list = []
+        self._process_page_numbers()
+
+
+    @property
+    def curr_page(self):
+        return self._curr_page
+
+
+    @curr_page.setter
+    def set_curr_page(self, curr_page):
+        self._curr_page = curr_page
+        self._process_page_numbers()
+
+
+    @property
+    def item_limit(self):
+        return self._item_limit
+
+
+    @item_limit.setter
+    def set_item_limit(self, item_limit):
+        self._item_limit = item_limit
+        self._process_page_numbers()
+
+
+    @property
+    def total_pages(self):
+        return self.last_page
 
 
     @property
     def has_pages(self):
         """Check if has multiple pages"""
-        return (self.last_page > 1)
+        return (self.last_page > self.first_page)
+
+
+    @property
+    def has_prev(self):
+        """Check if has previous page"""
+        return (self.curr_page > self.first_page)
+
+
+    @property
+    def has_next(self):
+        """Check if has next page"""
+        return (self.curr_page < self.last_page)
 
 
     def get_pager(self):
         """Get pager dict
 
-        Get dict having edged page numbers
+        Get dict having current and edged page numbers
         """
         pager = {}
         if self.has_pages:
-            pager['curr_page'] = self.curr_page
-            pager['last_page'] = self.last_page
-            if self.curr_page > 1:
-                pager['first'] = self.first_page
-                pager['prev'] = self.prev_page
-            else:
-                pager['first'] = None
-                pager['prev'] = None
+            pager['first'] = self.first_page
+            pager['prev'] = self.prev_page if self.has_prev else None
             pager['curr'] = self.curr_page
-            if self.curr_page < self.last_page:
-                pager['next'] = self.next_page
-                pager['last'] = self.last_page
-            else:
-                pager['next'] = None
-                pager['last'] = None
+            pager['next'] = self.next_page if self.has_next else None
+            pager['last'] = self.last_page
         return pager
 
 
@@ -82,7 +107,7 @@ class Paginator(object):
             second_last = self.last_page - 1
 
             # prev
-            if self.curr_page > self.first_page:
+            if self.has_prev:
                 self.page_list.append(('prev', self.prev_page))
             else:
                 self.page_list.append(('prev', None))
@@ -113,12 +138,22 @@ class Paginator(object):
                     self._append_range_pages(self.last_page - (1 + (adjacents * 3)), self.last_page + 1)
 
             # next
-            if self.curr_page < self.last_page:
+            if self.has_next:
                 self.page_list.append(('next', self.next_page))
             else:
                 self.page_list.append(('next', None))
 
         return self.page_list
+
+
+    def _process_page_numbers(self):
+        self.last_page = int(math.ceil(float(self.total_items) / float(self.item_limit)))
+        if self.curr_page < 1 or self.curr_page > self.last_page:
+           self.curr_page = 1
+        self.prev_page = self.curr_page - 1
+        self.next_page = self.curr_page + 1
+        self.item_offset = self.prev_page * self.item_limit
+        self.page_list = []
 
 
     def _append_range_pages(self, start, stop):
