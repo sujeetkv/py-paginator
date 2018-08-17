@@ -4,6 +4,10 @@ from setuptools import setup
 import py_paginator
 
 
+with open('README.md', 'r') as f:
+    long_description = f.read()
+
+
 setup(
     name=py_paginator.__title__,
     version=py_paginator.__version__,
@@ -11,7 +15,8 @@ setup(
     author=py_paginator.__author__,
     author_email=py_paginator.__email__,
     description=py_paginator.__description__,
-    long_description=py_paginator.__doc__,
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     url=py_paginator.__uri__,
     py_modules=['py_paginator'],
     include_package_data=True,
