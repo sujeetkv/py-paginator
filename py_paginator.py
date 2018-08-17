@@ -16,7 +16,7 @@ __all__ = ['Paginator']
 
 
 class Paginator(object):
-    """Paginator class generate page numbers for pagination
+    """Paginator class to generate page numbers for pagination
 
     :param total_items: number of total items
 
