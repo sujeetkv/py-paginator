@@ -34,7 +34,7 @@ use this `paginator` object in templates to create pagination links
     {% if 'page' in kwargs %}
         {% set _ = kwargs.pop('page') %}
     {% endif %}
-    {% if paginator.has_pages() %}
+    {% if paginator.has_pages %}
     <nav aria-label="Page navigation">
         {% if only_pager %}
             {% set pager = paginator.get_pager() %}
