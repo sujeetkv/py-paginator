@@ -18,7 +18,7 @@ use this `paginator` object in templates to create pagination links
 `paginator.item_limit` and `paginator.item_offset` can be used in database query to apply limit
 
 
-## Jinja macro to create pagination markup to use with flask
+## Sample jinja macro for flask framework
 
 ```html
 {#: PAGINATION ------------------------------------------------------ #}
