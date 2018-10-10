@@ -27,10 +27,7 @@ use this `paginator` object in templates to create pagination links
     :endpoint: flask request endpoint
     :only_pager: If True it will show a pager instead of numbered pagination
 #}
-{% macro pagination(paginator, endpoint=None, only_pager=False) %}
-    {% if not endpoint %}
-        {% set endpoint = request.endpoint %}
-    {% endif %}
+{% macro pagination(paginator, endpoint=request.endpoint, only_pager=False) %}
     {% if 'page' in kwargs %}
         {% set _ = kwargs.pop('page') %}
     {% endif %}
@@ -40,10 +37,10 @@ use this `paginator` object in templates to create pagination links
             {% set pager = paginator.get_pager() %}
             <ul class="pager">
                 <li class="previous{% if not paginator.has_prev %} disabled{% endif %}">
-                    <a href="{% if paginator.has_prev %}{{ pager.prev }}{% else %}#{% endif %}"><span aria-hidden="true">&laquo;</span> Prev</a>
+                    <a href="{% if paginator.has_prev %}{{ url_for(endpoint, page=pager.prev, **kwargs) }}{% else %}#{% endif %}"><span aria-hidden="true">&laquo;</span> Prev</a>
                 </li>
                 <li class="next{% if not paginator.has_next %} disabled{% endif %}">
-                    <a href="{% if paginator.has_next %}{{ pager.next }}{% else %}#{% endif %}">Next <span aria-hidden="true">&raquo;</span></a>
+                    <a href="{% if paginator.has_next %}{{ url_for(endpoint, page=pager.next, **kwargs) }}{% else %}#{% endif %}">Next <span aria-hidden="true">&raquo;</span></a>
                 </li>
             </ul>
         {% else %}
