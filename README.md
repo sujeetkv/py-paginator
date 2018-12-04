@@ -1,6 +1,7 @@
 # py-paginator
 Paginator to generate page numbers for pagination
 
+[![Build Status](https://travis-ci.org/sujeetkv/py-paginator.svg?branch=master)](https://travis-ci.org/sujeetkv/py-paginator)
 
 ## Usage Example
 
