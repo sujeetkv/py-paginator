@@ -18,7 +18,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url=py_paginator.__uri__,
-    py_modules=['py_paginator'],
+    packages=['py_paginator'],
     include_package_data=True,
     platforms='any',
     keywords='paginator py_paginator py-paginator',
