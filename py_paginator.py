@@ -3,7 +3,7 @@
 import math
 
 __title__ = 'py_paginator'
-__version__ = '0.0.1'
+__version__ = '1.0.0'
 __author__ = 'Sujeet Kumar'
 __email__ = 'sujeetkv90@gmail.com'
 __uri__ = 'https://github.com/sujeetkv/py-paginator'
