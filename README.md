@@ -28,8 +28,9 @@ use this `paginator` object in templates to create pagination links
     :only_pager: If True it will show a pager instead of numbered pagination
 #}
 {% macro pagination(paginator, endpoint=request.endpoint, only_pager=False) %}
+    {% set __ = kwargs.update(request.args) %}
     {% if 'page' in kwargs %}
-        {% set _ = kwargs.pop('page') %}
+        {% set __ = kwargs.pop('page') %}
     {% endif %}
     {% if paginator.has_pages %}
     <nav aria-label="Page navigation">
