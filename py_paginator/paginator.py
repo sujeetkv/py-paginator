@@ -8,7 +8,7 @@ __all__ = ['Paginator']
 
 
 class Paginator(object):
-    """Paginator class to generate page numbers for pagination
+    """Paginator class to generate page numbers for pagination.
 
     :param total_items: number of total items
 
@@ -26,6 +26,7 @@ class Paginator(object):
 
     @property
     def curr_page(self):
+        """Current page number."""
         return self._curr_page
 
 
@@ -37,6 +38,7 @@ class Paginator(object):
 
     @property
     def item_limit(self):
+        """Number of items per page."""
         return self._item_limit
 
 
@@ -48,31 +50,32 @@ class Paginator(object):
 
     @property
     def total_pages(self):
+        """Number of total pages."""
         return self.last_page
 
 
     @property
     def has_pages(self):
-        """Check if has multiple pages"""
+        """Check if has multiple pages."""
         return (self.last_page > self.first_page)
 
 
     @property
     def has_prev(self):
-        """Check if has previous page"""
+        """Check if has previous page."""
         return (self._curr_page > self.first_page)
 
 
     @property
     def has_next(self):
-        """Check if has next page"""
+        """Check if has next page."""
         return (self._curr_page < self.last_page)
 
 
     def get_pager(self):
-        """Get pager dict
+        """Get pager dict.
 
-        Get dict having current and edged page numbers
+        Returns a dict having current and edged page numbers.
         """
         pager = {}
         if self.has_pages:
@@ -85,7 +88,7 @@ class Paginator(object):
 
 
     def get_pages(self, adjacents=1):
-        """Get page numbers list
+        """Get page numbers list.
 
         :param adjacents: number of adjacent page numbers of current page in compact state
         """

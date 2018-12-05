@@ -5,7 +5,7 @@ Paginator to generate page numbers for pagination
 
 ## Usage Example with flask framework
 
-* _app.py_:
+- **app.py**:
 
 ```python
 from flask import Flask, request, render_template
@@ -30,7 +30,7 @@ def home():
 
  Here `paginator.item_limit` and `paginator.item_offset` can be used in database query to apply limit. `paginator` object can be used in templates to create pagination links.
 
-* _templates/macros.html_:
+- **templates/macros.html**:
 
 ```html
 {#
@@ -88,7 +88,7 @@ def home():
 {% endmacro %}
 ```
 
-* _templates/home.html_:
+- **templates/home.html**:
 
 ```html
 {% from "macros.html" import render_pagination with context %}
