@@ -2,6 +2,7 @@
 Paginator to generate page numbers for pagination
 
 [![Build Status](https://travis-ci.org/sujeetkv/py-paginator.svg?branch=master)](https://travis-ci.org/sujeetkv/py-paginator)
+[![PyPI Version](https://badge.fury.io/py/py-paginator.svg)](https://badge.fury.io/py/py-paginator)
 
 ## Installation
 
